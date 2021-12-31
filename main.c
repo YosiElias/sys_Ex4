@@ -89,11 +89,18 @@ int main() {
                 printGraph_cmd(head);   //Todo: dbs
                 break;
             }
-//            case 'S':
-//            {
+            case 'S':
+            {
 //                shortsPath_cmd(head);
-//                break;
-//            }
+                int src;
+                int dest;
+                scanf(" %d", &src);
+                scanf(" %d", &dest);
+                float r = dijkstra(&head, search(&head,src),search(&head,dest));
+                printf("%f",r);
+                break;
+            }
+            //A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 S 1 3 S 3 1 S 2 3
 //            case 'T':
 //            {
 //                TSP_cmd(head);
@@ -138,6 +145,3 @@ int main() {
 ////    delete(&Head);
 //    return 0;
 //}
-
-
-
