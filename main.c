@@ -96,8 +96,8 @@ int main() {
                 int dest;
                 scanf(" %d", &src);
                 scanf(" %d", &dest);
-                float r = dijkstra(&head, search(&head,src),search(&head,dest));
-                printf("%f",r);
+                int r = dijkstra(&head, search(&head,src),search(&head,dest));
+                printf("%d\n",r);
                 break;
             }
             //A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 S 1 3 S 3 1 S 2 3

@@ -15,7 +15,7 @@ typedef struct GRAPH_NODE_ {
     pedge edges;
     struct node* nextH;
     int visit;
-    float dist;
+    int dist;
 } node, *pnode;
 
 

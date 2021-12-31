@@ -230,7 +230,7 @@ pnode min(pnode *head) {
     pnode tmp = *head;
     pnode m = tmp;
 
-    float d = tmp->dist;
+    int d = tmp->dist;
     while (tmp != NULL) {
         if (tmp->dist < d) {
             d = tmp->dist;
@@ -300,7 +300,7 @@ float dijkstra(pnode *head, pnode src, pnode dest) {
                 e = e->next;
                 continue;
             }
-            float alt = v->dist + e->weight;
+            int alt = v->dist + e->weight;
             if (alt < n->dist) {
                 n->dist = alt;
 
