@@ -13,10 +13,10 @@ typedef struct edge_ {
 typedef struct GRAPH_NODE_ {
     int node_num;
     pedge edges;
-    int visit;
-    float dist;
+//    int visit;
+//    float dist;
     struct GRAPH_NODE_ *next;
-    struct GRAPH_NODE_ *heapNext;
+//    struct GRAPH_NODE_ *heapNext;
 } node, *pnode;
 
 void build_graph_cmd(pnode *head);
@@ -30,5 +30,6 @@ void TSP_cmd(pnode head);
 pnode newNode(int id);
 int search(int dest, pnode *pNode);
 void addEdge(int w, pedge *pEdge, pnode *pNode1);
+void add_last(pnode* H, int data);
 
 #endif

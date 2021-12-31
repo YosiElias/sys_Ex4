@@ -30,33 +30,36 @@ int main() {
             {
                 build_graph_cmd(head);
 //                deleteGraph_cmd(head);
+//                for (int j = 0; j < 100; ++j) {
+//                    add_last(head, j)
+//                }
                 break;
             }
-            case 'n':
-            {
-                getchar();
-                scanf(" %d", &id);
-                pnode n_node = newNode(id);
-
-                while (scanf(" %d", &i)==1)   //digit
-            {
-                int first=1;
-                if (first){
-                    dest = i;
-                    first=0;
-                }
-                else{
-                    w = i;
-                    first=1;
-                }
-                pnode p_dest = search(dest, head);
-                if (p_dest==NULL){
-                    p_dest = newNode(dest);
-                }
-                addEdge(w, n_node->edges, p_dest);
-            }
-                break;
-            }
+//            case 'n':
+//            {
+//                getchar();
+//                scanf(" %d", &id);
+//                pnode n_node = newNode(id);
+//
+//                while (scanf(" %d", &i)==1)   //digit
+//            {
+//                int first=1;
+//                if (first){
+//                    dest = i;
+//                    first=0;
+//                }
+//                else{
+//                    w = i;
+//                    first=1;
+//                }
+//                pnode p_dest = search(dest, head);
+//                if (p_dest==NULL){
+//                    p_dest = newNode(dest);
+//                }
+////                addEdge(w, n_node->edges, p_dest);
+//            }
+//                break;
+//            }
 //            case 'B':
 //            {
 //                insert_node_cmd(&head);
@@ -77,9 +80,9 @@ int main() {
 //                TSP_cmd(head);
 //                break;
 //            }
-            default:
-//                c = getchar();
-                continue;
+//            default:
+////                c = getchar();
+//                continue;
 
         }
 
