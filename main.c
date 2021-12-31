@@ -1,21 +1,13 @@
-#include <stdio.h>
-//#include <malloc.h>
 #include <stdlib.h>
-
+#include <stdio.h>
 #include "graph.h"
-
-pnode *head = NULL;
-
-
-
-
-
 
 
 
 int main() {
     printf("Hello, World!\n");
     //Get the input:
+    pnode head = NULL;
     char c;
     int i = 0;
     int id;
@@ -28,48 +20,75 @@ int main() {
         {
             case 'A':
             {
-                build_graph_cmd(head);
-//                deleteGraph_cmd(head);
-//                for (int j = 0; j < 100; ++j) {
-//                    add_last(head, j)
-//                }
+                printf("\nin A\n");
+                if (head==NULL)
+                    build_graph_cmd(&head);
+                else{
+                    deleteGraph_cmd(&head);
+                    build_graph_cmd(&head);
+                }
+                printGraph_cmd(head);   //Todo: dbs
                 break;
             }
-//            case 'n':
-//            {
-//                getchar();
-//                scanf(" %d", &id);
-//                pnode n_node = newNode(id);
-//
-//                while (scanf(" %d", &i)==1)   //digit
-//            {
-//                int first=1;
-//                if (first){
-//                    dest = i;
-//                    first=0;
-//                }
-//                else{
-//                    w = i;
-//                    first=1;
-//                }
-//                pnode p_dest = search(dest, head);
-//                if (p_dest==NULL){
-//                    p_dest = newNode(dest);
-//                }
-////                addEdge(w, n_node->edges, p_dest);
-//            }
-//                break;
-//            }
-//            case 'B':
-//            {
-//                insert_node_cmd(&head);
-//                break;
-//            }
-//            case 'D':
-//            {
-//                delete_node_cmd(&head);
-//                break;
-//            }
+            case 'n':
+            {
+                printf("\nin n\n");
+                scanf(" %d", &id);
+                pnode n_node = search(&head, id);
+                printf("\n\nfind! %d\n", n_node->node_num);
+                while (scanf(" %d", &i)==1)   //digit
+                {
+                    dest = i;
+                    scanf(" %d", &w);
+                    pnode p_dest = search(&head, dest);
+                    if (p_dest==NULL)
+                        printf("Error: not found dest of edge");    //Todo: dbs
+                    addEdge(&(n_node->edges), w, &p_dest);
+                }
+                printGraph_cmd(head);   //Todo: dbs
+                break;
+            }
+            case 'B':
+            {
+                printf("\nin B\n");
+                scanf(" %d", &id);
+                pnode n_node = search(&head, id);
+                if (n_node==NULL) {     //creat new node
+                    add_last(&head, id);
+                    n_node = search(&head, id);
+                }
+                else{
+                    //delete all edges from n_node:
+                    pedge edgeHead = n_node->edges;
+                    while (edgeHead){
+                        pedge eTmp = edgeHead;
+                        edgeHead = edgeHead->next;
+                        free(eTmp);
+                    }
+                    n_node->edges = NULL;
+                }
+
+                while (scanf(" %d", &i)==1)   //digit
+                {
+                    dest = i;
+                    scanf(" %d", &w);
+                    pnode p_dest = search(&head, dest);
+                    if (p_dest==NULL)
+                        printf("\nError: not found dest of edge: %d\n", dest);    //Todo: dbs
+                    addEdge(&(n_node->edges), w, &p_dest);
+                }
+                printGraph_cmd(head);   //Todo: dbs
+                break;
+            }
+            case 'D':
+            {
+                printf("\nin D\n");
+                int id;
+                scanf(" %d", &id);
+                delete_node_cmd(&head, id);
+                printGraph_cmd(head);   //Todo: dbs
+                break;
+            }
 //            case 'S':
 //            {
 //                shortsPath_cmd(head);
@@ -101,14 +120,24 @@ int main() {
 
 
 
-
-
-
-
-
-
-
-
+//
+//int main(){
+//    pnode Head = NULL;
+////    printf("is in");
+////    print_list(Head);
+////    add_first(&Head,2);
+////    add_first(&Head,1);
+////    add_last(&Head,3);
+//    for (int i = 0; i < 10000; ++i) {
+//        add_last(&Head,3);
+//    }
+////    add_last(&Head,4);
+//////    remove_node(&Head,4);
+//////    remove_node(&Head,6);
+//    print_list(Head);
+////    delete(&Head);
+//    return 0;
+//}
 
 
 
