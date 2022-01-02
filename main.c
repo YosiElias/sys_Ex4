@@ -100,12 +100,25 @@ int main() {
                 printf("%d\n",r);
                 break;
             }
-            //A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 S 1 3 S 3 1 S 2 3
-//            case 'T':
-//            {
+            //A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 T 3 2 0 1
+            case 'T':
+            {
+                int k;
+                scanf(" %d", &k);
+                int *arr = (int*) malloc(sizeof(int)*k);
+                if (arr == NULL) {
+                    printf("Memory not allocated.\n");
+                    exit(0);
+                }
+                for (int j = 0; j < k; ++j) {
+                    scanf(" %d", &arr[j]);
+                }
+                int res = tsp(&head, arr, k);
+                printf("%d",res);
+                free(arr);
 //                TSP_cmd(head);
-//                break;
-//            }
+                break;
+            }
 //            default:
 ////                c = getchar();
 //                continue;

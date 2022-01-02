@@ -272,11 +272,11 @@ void addlastD(pnode *head, pnode n) {
     tmp->nextH = n;
 }
 
-float dijkstra(pnode *head, pnode src, pnode dest) {
+int dijkstra(pnode *head, pnode src, pnode dest) {
     pnode tmp = *head;
     //Init all nodes in graph.
     while (tmp != NULL) {
-        tmp->dist = INFINITY;
+        tmp->dist = INT_MAX;
         tmp->visit = 0;
         tmp->nextH = NULL;
         tmp = tmp->next;
@@ -305,12 +305,76 @@ float dijkstra(pnode *head, pnode src, pnode dest) {
                 n->dist = alt;
 
                 //If the node not in queue and not visited
-                if (n->visit<1){
+                if (n->visit < 1) {
                     addlastD(h, n);
-                    n->visit=1;}
+                    n->visit = 1;
+                }
             }
             e = e->next;
         }
     }
     return -1;
+}
+
+int m = 0;
+
+void swap(int *arr, int a, int b) {
+    int tmp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = tmp;
+}
+
+void sp_permutation(pnode *head, int res[], int arr[], int len) {
+    int i = 0, j = 1, sum = 0, x;
+    while (j < len) {
+        x = dijkstra(head, search(head, arr[i++]), search(head, arr[j++]));
+        if (x == -1) {
+            res[m++] = -1;
+            return;
+        }
+        sum += x;
+    }
+    res[m++] = sum;
+}
+
+/* permute an array recursively */
+void permute(pnode *head, int res[], int arr[], int start, int end) {
+    int i;
+    if (start == end) /* this function is done */{
+        sp_permutation(head, res, arr, end);
+        return;
+    }
+    permute(head, res, arr, start + 1, end); /* start at next element */
+    /* permute remaining elements recursively */
+    for (i = start + 1; i < end; i++) {
+        if (arr[start] == arr[i]) continue; /* skip */
+        swap(arr, start, i);
+        permute(head, res, arr, start + 1, end);
+        swap(arr, start, i); /* restore element order */
+
+    }
+}
+
+int tsp(pnode *head, int arr[], int len) {
+    m = 0;
+    int f = len, s = 1;
+    while (f > 0) {
+        s *= f;
+        f--;
+    }
+    int *a = (int *) malloc(sizeof(int) * s);
+    if (a == NULL) {
+        printf("Memory not allocated.\n");
+        exit(0);
+    }
+    permute(head, a, arr, 0, len);
+    int min = INT_MAX;
+    for (int i = 0; i < s; ++i) {
+        if (a[i] != -1 && a[i] < min)
+            min = a[i];
+    }
+    if (min == INT_MAX)
+        min = -1;
+    free(a);
+    return min;
 }

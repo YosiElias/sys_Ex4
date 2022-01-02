@@ -34,9 +34,9 @@ void printGraph_cmd(pnode head); //for self debug
 void deleteGraph_cmd(pnode* head);
 void shortsPath_cmd(pnode head);
 void TSP_cmd(pnode head);
-float dijkstra(pnode *head, pnode src, pnode dest);
+int dijkstra(pnode *head, pnode src, pnode dest);
 pnode newNode(int id);
 pnode search(pnode *head, int id);
 void addEdge(pedge *p_src, int w, pnode *p_dest);
-
+int tsp(pnode *head, int arr[], int len);
 #endif
