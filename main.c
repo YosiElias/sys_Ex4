@@ -82,7 +82,7 @@ int main() {
             }
             case 'D':
             {
-                printf("\nin D\n");
+                // printf("\nin D\n");
                 int id;
                 scanf(" %d", &id);
                 delete_node_cmd(&head, id);
