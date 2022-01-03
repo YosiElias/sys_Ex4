@@ -3,8 +3,9 @@
 #include <math.h>
 #include "graph.h"
 
+typedef struct GRAPH_NODE_ *pnode;
 
-void delete_edge_to(pnode *pNode, int num);
+void delete_edge_to(pnode *head, int id);
 
 
 pedge creat_edge(int w, pnode *pNode);
@@ -37,7 +38,7 @@ void build_graph_cmd(pnode *head) {
     int numOfNoeds;
     if (scanf(" %d", &numOfNoeds) != 1) // digit
         printf("Error: not get value as expected");  //self checks
-    printf("\nnum: %d\n", numOfNoeds);
+//    printf("\nnum: %d\n", numOfNoeds);
     for (int i = 0; i < numOfNoeds; ++i) {
         add_last(head, i);
     }
@@ -61,7 +62,7 @@ void add_first(pnode *H, int id) {
         printf("no memory!");
         return;
     }
-    n->next = *H;
+    n->next = (struct node *) *H;
     *H = n;
 }
 
@@ -77,14 +78,14 @@ void add_last(pnode *H, int id) {
     }
     pnode tmp = *H;
     while (tmp->next)
-        tmp = tmp->next;
-    tmp->next = n;
+        tmp = (pnode) tmp->next;
+    tmp->next = (struct node *) n;
 }
 
 void delete(pnode *H) {
     while (*H) {
         pnode tmp = *H;
-        *H = (*H)->next;
+        *H = (pnode) (*H)->next;
         free(tmp);
     }
 }
@@ -98,7 +99,7 @@ void printGraph_cmd(pnode H) {
             e_tmp = e_tmp->next;
         }
         printf("-> ");
-        H = H->next;
+        H = (pnode) H->next;
     }
     printf("||\n");
 }
@@ -125,7 +126,7 @@ void printGraph_cmd(pnode H) {
 void deleteGraph_cmd(pnode *head) {
     while (*head) {
         pnode tmp = *head;
-        *head = (*head)->next;
+        *head = (pnode) (*head)->next;
         //delete edges from tmp:
         pedge edgeHead = tmp->edges;
         while (edgeHead) {
@@ -136,9 +137,9 @@ void deleteGraph_cmd(pnode *head) {
         delete_edge_to(head, tmp->node_num);
         free(tmp);
     }
-    if (*head)  //Todo: was: head
-        printf("\nnot delete!\n");
-    printf("\ndelete :)\n");
+//    if (*head)  //Todo: was: head
+//        printf("\nnot delete!\n");
+//    printf("\ndelete :)\n");
 }
 
 void delete_edge_to(pnode *head, int id) {
@@ -154,14 +155,14 @@ void delete_edge_to(pnode *head, int id) {
         }
         //check all other edges:
         pedge e = tmp->edges;   //assume that dont have more than 1 edge to id from some node -> Todo: check this
-        while (e && e->next && e->next->endpoint != id)
+        while (e && e->next && (int) e->next->endpoint->node_num != id)
             e = e->next;
         if (e != NULL && e->next != NULL) {
             pedge eTmp = e->next;
             e->next = e->next->next;
             free(eTmp);
         }
-        tmp = tmp->next;
+        tmp = (pnode) tmp->next;
     }
 }
 
@@ -169,7 +170,7 @@ pnode search(pnode *head, int id) {
     pnode tmp = *head;
     while (tmp) {
         if (tmp->node_num != id)
-            tmp = tmp->next;
+            tmp = (pnode) tmp->next;
         else {
             return tmp;
         }
@@ -180,7 +181,7 @@ pnode search(pnode *head, int id) {
 void delete_node_cmd(pnode *head, int id) {
     pnode tmp = *head;
     if (tmp->node_num == id) {
-        *head = tmp->next;
+        *head = (pnode) tmp->next;
         //delete edges from tmp:
         pedge edgeHead = tmp->edges;
         while (edgeHead) {
@@ -194,9 +195,9 @@ void delete_node_cmd(pnode *head, int id) {
     }
     pnode tmp2;
     while (tmp && tmp->next) {
-        tmp2 = tmp->next;
+        tmp2 = (pnode) tmp->next;
         if (tmp2->node_num != id)
-            tmp = tmp->next;
+            tmp = (pnode) tmp->next;
         else
             break;
     }
@@ -276,10 +277,10 @@ int dijkstra(pnode *head, pnode src, pnode dest) {
     pnode tmp = *head;
     //Init all nodes in graph.
     while (tmp != NULL) {
-        tmp->dist = INT_MAX;
+        tmp->dist = 9999;//INT_MAX;
         tmp->visit = 0;
         tmp->nextH = NULL;
-        tmp = tmp->next;
+        tmp = (pnode) tmp->next;
     }
     //Init queue.
     pnode *h = &src;
@@ -368,12 +369,12 @@ int tsp(pnode *head, int arr[], int len) {
         exit(0);
     }
     permute(head, a, arr, 0, len);
-    int min = INT_MAX;
+    int min = 9999; //INT_MAX;
     for (int i = 0; i < s; ++i) {
         if (a[i] != -1 && a[i] < min)
             min = a[i];
     }
-    if (min == INT_MAX)
+    if (min == 9999) //INT_MAX
         min = -1;
     free(a);
     return min;

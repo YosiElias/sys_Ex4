@@ -5,7 +5,7 @@
 
 
 int main() {
-    printf("Hello, World!\n");
+//    printf("Hello, World!\n");
     //Get the input:
     pnode head = NULL;
     char c;
@@ -13,29 +13,29 @@ int main() {
     int id;
     int dest;
     int w;
-    int temp=0;
+    // int temp=0;
     while ( (scanf(" %c", &c)) != EOF)
     {
         switch (c)
         {
             case 'A':
             {
-                printf("\nin A\n");
+//                printf("\nin A\n");
                 if (head==NULL)
                     build_graph_cmd(&head);
                 else{
                     deleteGraph_cmd(&head);
                     build_graph_cmd(&head);
                 }
-                printGraph_cmd(head);   //Todo: dbs
+//                printGraph_cmd(head);   //Todo: dbs
                 break;
             }
             case 'n':
             {
-                printf("\nin n\n");
+//                printf("\nin n\n");
                 scanf(" %d", &id);
                 pnode n_node = search(&head, id);
-                printf("\n\nfind! %d\n", n_node->node_num);
+//                printf("\n\nfind! %d\n", n_node->node_num);
                 while (scanf(" %d", &i)==1)   //digit
                 {
                     dest = i;
@@ -45,12 +45,12 @@ int main() {
                         printf("Error: not found dest of edge");    //Todo: dbs
                     addEdge(&(n_node->edges), w, &p_dest);
                 }
-                printGraph_cmd(head);   //Todo: dbs
+//                printGraph_cmd(head);   //Todo: dbs
                 break;
             }
             case 'B':
             {
-                printf("\nin B\n");
+//                printf("\nin B\n");
                 scanf(" %d", &id);
                 pnode n_node = search(&head, id);
                 if (n_node==NULL) {     //creat new node
@@ -77,7 +77,7 @@ int main() {
                         printf("\nError: not found dest of edge: %d\n", dest);    //Todo: dbs
                     addEdge(&(n_node->edges), w, &p_dest);
                 }
-                printGraph_cmd(head);   //Todo: dbs
+//                printGraph_cmd(head);   //Todo: dbs
                 break;
             }
             case 'D':
@@ -86,7 +86,7 @@ int main() {
                 int id;
                 scanf(" %d", &id);
                 delete_node_cmd(&head, id);
-                printGraph_cmd(head);   //Todo: dbs
+//                printGraph_cmd(head);   //Todo: dbs
                 break;
             }
             case 'S':
@@ -97,10 +97,10 @@ int main() {
                 scanf(" %d", &src);
                 scanf(" %d", &dest);
                 int r = dijkstra(&head, search(&head,src),search(&head,dest));
-                printf("%d\n",r);
+                printf("Dijsktra shortest path: %d\n",r);
                 break;
             }
-            //A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 T 3 2 0 1
+                //A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 T 3 2 0 1
             case 'T':
             {
                 int k;
@@ -114,7 +114,7 @@ int main() {
                     scanf(" %d", &arr[j]);
                 }
                 int res = tsp(&head, arr, k);
-                printf("%d",res);
+                printf("TSP shortest path: %d\n",res);
                 free(arr);
 //                TSP_cmd(head);
                 break;
@@ -127,7 +127,7 @@ int main() {
 
     }
 
-    return 1;
+    return 0;
 }
 
 

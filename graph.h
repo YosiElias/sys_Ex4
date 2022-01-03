@@ -13,7 +13,7 @@ typedef struct GRAPH_NODE_ {
     int node_num;
     struct node* next;
     pedge edges;
-    struct node* nextH;
+    pnode nextH;
     int visit;
     int dist;
 } node, *pnode;
