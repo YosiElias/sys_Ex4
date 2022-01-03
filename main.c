@@ -97,7 +97,7 @@ int main() {
                 scanf(" %d", &src);
                 scanf(" %d", &dest);
                 int r = dijkstra(&head, search(&head,src),search(&head,dest));
-                printf("Dijsktra shortest path: %d\n",r);
+                printf("Dijsktra shortest path: %d \n",r);
                 break;
             }
                 //A 4 n 0 2 5 3 3 n 2 0 4 1 1 n 1 3 7 0 2 T 3 2 0 1
@@ -114,7 +114,7 @@ int main() {
                     scanf(" %d", &arr[j]);
                 }
                 int res = tsp(&head, arr, k);
-                printf("TSP shortest path: %d\n",res);
+                printf("TSP shortest path: %d \n",res);
                 free(arr);
 //                TSP_cmd(head);
                 break;
