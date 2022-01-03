@@ -118,8 +118,10 @@ int main() {
 //                TSP_cmd(head);
                 break;
             }
+            case '\n':
+                deleteGraph_cmd(&head);
 //            default:
-////                c = getchar();
+// //                c = getchar();
 //                continue;
 
         }
