@@ -5,7 +5,6 @@
 
 
 int main() {
-//    printf("Hello, World!\n");
     //Get the input:
     pnode head = NULL;
     char c;
@@ -126,35 +125,7 @@ int main() {
         }
 
     }
-
+    deleteGraph_cmd(&head);
     return 0;
 }
 
-
-
-
-
-
-
-
-
-
-
-//
-//int main(){
-//    pnode Head = NULL;
-////    printf("is in");
-////    print_list(Head);
-////    add_first(&Head,2);
-////    add_first(&Head,1);
-////    add_last(&Head,3);
-//    for (int i = 0; i < 10000; ++i) {
-//        add_last(&Head,3);
-//    }
-////    add_last(&Head,4);
-//////    remove_node(&Head,4);
-//////    remove_node(&Head,6);
-//    print_list(Head);
-////    delete(&Head);
-//    return 0;
-//}

@@ -155,9 +155,9 @@ void delete_edge_to(pnode *head, int id) {
         }
         //check all other edges:
         pedge e = tmp->edges;   //assume that dont have more than 1 edge to id from some node -> Todo: check this
-        while (e && e->next && (int) e->next->endpoint->node_num != id)
+        while (e && e->next &&  e->next->endpoint->node_num != id)
             e = e->next;
-        if (e != NULL && e->next != NULL) {
+        if (e && e->next && e->next->endpoint->node_num == id) {    // @ e != NULL && e->next != NULL
             pedge eTmp = e->next;
             e->next = e->next->next;
             free(eTmp);
@@ -277,7 +277,7 @@ int dijkstra(pnode *head, pnode src, pnode dest) {
     pnode tmp = *head;
     //Init all nodes in graph.
     while (tmp != NULL) {
-        tmp->dist = 9999;//INT_MAX;
+        tmp->dist = 99999;//INT_MAX;
         tmp->visit = 0;
         tmp->nextH = NULL;
         tmp = (pnode) tmp->next;
@@ -369,12 +369,12 @@ int tsp(pnode *head, int arr[], int len) {
         exit(0);
     }
     permute(head, a, arr, 0, len);
-    int min = 9999; //INT_MAX;
+    int min = 99999; //INT_MAX;
     for (int i = 0; i < s; ++i) {
         if (a[i] != -1 && a[i] < min)
             min = a[i];
     }
-    if (min == 9999) //INT_MAX
+    if (min == 99999) //INT_MAX
         min = -1;
     free(a);
     return min;
