@@ -157,7 +157,7 @@ void delete_edge_to(pnode *head, int id) {
         pedge e = tmp->edges;   //assume that dont have more than 1 edge to id from some node -> Todo: check this
         while (e && e->next &&  e->next->endpoint->node_num != id)
             e = e->next;
-        if (e != NULL && e->next != NULL) {    // @e && e->next && e->next->endpoint->node_num == id 
+        if (e && e->next && e->next->endpoint->node_num == id ) {    // @e != NULL && e->next != NULL
             pedge eTmp = e->next;
             e->next = e->next->next;
             free(eTmp);
